@@ -17,10 +17,9 @@ namespace SnailModdingTools.lib
 
         public static string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Will_You_Snail";
 
-        string slot;
-        public string Slot => slot;
+        public int Slot { get; set; }
 
-        public string version;
+        public string Version { get; set; }
 
         public int level;
 
@@ -36,9 +35,9 @@ namespace SnailModdingTools.lib
             FileStream stream = File.OpenRead(saveFolder + "/" + saveSlotPrefix[slot - 1] + "SaavoGame23-2.sav");
             StreamReader reader = new StreamReader(stream);
 
-            this.slot = slot.ToString();
+            this.Slot = slot;
 
-            version = reader.GetString("Game Version");
+            Version = reader.GetString("Game Version");
 
             level = reader.GetInt("Room");
 

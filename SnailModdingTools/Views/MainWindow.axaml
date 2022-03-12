@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:vm="using:SnailModdingTools.ViewModels"
+		xmlns:local="clr-namespace:SnailModdingTools;assembly=SnailModdingTools"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -21,7 +22,7 @@
 				</MenuItem>
 			</Menu>
 
-			<TreeView DockPanel.Dock="Left">
+			<TreeView SelectedItem="{Binding SelectedItem}" Grid.Column="0" Grid.Row="1" DockPanel.Dock="Left" Name="Tree">
 				<TreeViewItem Header="Saves" Items="{Binding Saves}">
 					<TreeViewItem.ItemTemplate>
 						<TreeDataTemplate DataType="snaillib:SaveFile" ItemsSource="{Binding Saves}">
@@ -30,7 +31,27 @@
 					</TreeViewItem.ItemTemplate>
 				</TreeViewItem>
 			</TreeView>
+
+			<GridSplitter Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Stretch" ShowsPreview="True" Width="3"/>
+
+			<ScrollViewer Grid.Column="2" Grid.RowSpan="2" VerticalScrollBarVisibility="Auto">
+				<ContentControl Margin="8,0" Content="{Binding Selected}" Name="DataEditor">
+					<ContentControl.DataTemplates>
+						<DataTemplate DataType="{x:Type local:DescriptionView}">
+							<StackPanel>
+								<TextBlock Text="{Binding Heading}" FontWeight="Bold"/>
+								<Separator/>
+								<TextBlock Text="{Binding Description}"/>
+							</StackPanel>
+						</DataTemplate>
+						<DataTemplate DataType="{x:Type snaillib:SaveFile}">
+							<local:SaveEditor/>
+						</DataTemplate>
+					</ContentControl.DataTemplates>
+				</ContentControl>
+			</ScrollViewer>
 		</DockPanel>
+		
 	</Grid>
 
 </Window>

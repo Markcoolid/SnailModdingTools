@@ -6,6 +6,7 @@ using SnailModdingTools.lib;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reactive;
@@ -14,6 +15,8 @@ namespace SnailModdingTools.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private object selected;
+        public object Selected { get => selected; set => this.RaiseAndSetIfChanged(ref selected, value); }
 
         public MainWindowViewModel()
         {
@@ -21,6 +24,9 @@ namespace SnailModdingTools.ViewModels
 
             List<SaveFile> files = getExistingSavefiles();
             saves = new ObservableCollection<SaveFile>(files);
+
+            selected = new DescriptionView("Snail Mod Tools", "Welcome to the Will You Snail? mod tools. Please select an item.");
+            _selectedItem = new object();
 
         }
 
@@ -70,6 +76,28 @@ namespace SnailModdingTools.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref saves, value);
+            }
+        }
+
+        private object _selectedItem;
+        public object SelectedItem { get { return _selectedItem; } set {
+                _selectedItem = value;
+
+                if (value is TreeViewItem item)
+                {
+                    if (item.Header.ToString() == "Saves")
+                    {
+                        Selected = new DescriptionView("Saves", "Please select a save");
+                    }
+                }
+                else if(value is SaveFile)
+                {
+                    Selected = value;
+                }
+                else
+                {
+                    Selected = new DescriptionView("Snail Mod Tools", "Welcome to the Will You Snail? mod tools. Please select an item."); ;
+                }
             }
         }
     }
