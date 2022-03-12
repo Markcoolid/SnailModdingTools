@@ -51,5 +51,28 @@ namespace SnailModdingTools.lib
                 }
             }
         }
+
+        public static List<string> GetList(this StreamReader reader, string name)
+        {
+            string? line;
+            while(true)
+            {
+                line = reader.ReadLine();
+                if(line == null)
+                {
+                    throw new NullReferenceException();
+                }
+                if(line == name)
+                {
+                    int variable = int.Parse(reader.ReadLine()!);
+                    List<string> list = new List<string>();
+                    for(int i = 0; i < variable; i++)
+                    {
+                        list.Add(reader.ReadLine()!);
+                    }
+                    return list;
+                }
+            }
+        }
     }
 }

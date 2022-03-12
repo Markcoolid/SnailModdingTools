@@ -27,7 +27,7 @@ namespace SnailModdingTools.lib
 
         public int difficulty;
 
-        public List<string> playedVoicelines = new List<string>();
+        public List<string> playedVoicelines;
 
         public SaveFile(int slot)
         {
@@ -45,12 +45,7 @@ namespace SnailModdingTools.lib
 
             difficulty = reader.GetInt("Difficulty");
 
-            int played = reader.GetInt("Played Voice Lines");
-
-            for(int i = 0; i < played; i++)
-            {
-                playedVoicelines.Add(reader.ReadLine()!);
-            }
+            playedVoicelines = reader.GetList("Played Voice Lines");
 
         }
 
