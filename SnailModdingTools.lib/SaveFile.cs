@@ -42,35 +42,11 @@ namespace SnailModdingTools.lib
 
             level = reader.GetInt("Room");
 
-            while (true)
-            {
-                string line = reader.ReadLine()!;
-                if (line == "Deaths")
-                {
-                    break;
-                }
-            }
-            deaths = int.Parse(reader.ReadLine()!);
+            deaths = reader.GetInt("Deaths");
 
-            while (true)
-            {
-                string line = reader.ReadLine()!;
-                if (line == "Difficulty")
-                {
-                    break;
-                }
-            }
-            difficulty = int.Parse(reader.ReadLine()!);
+            difficulty = reader.GetInt("Difficulty");
 
-            while (true)
-            {
-                string line = reader.ReadLine()!;
-                if (line == "Played Voice Lines")
-                {
-                    break;
-                }
-            }
-            int played = int.Parse(reader.ReadLine()!);
+            int played = reader.GetInt("Played Voice Lines");
 
             for(int i = 0; i < played; i++)
             {
