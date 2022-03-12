@@ -12,6 +12,12 @@
 		<StackPanel>
 			<TextBlock Text="Version"/>
 			<TextBox Text="{Binding Version}"/>
+			<TextBlock Text="Level"/>
+			<TextBox Text="{Binding Level}"/>
+			<TextBlock Text="Deaths"/>
+			<NumericUpDown Value="{Binding Deaths}" AllowSpin="false" ShowButtonSpinner="false"/>
+			<TextBlock Text="Difficulty"/>
+			<NumericUpDown Value="{Binding Difficulty}" AllowSpin="false" ShowButtonSpinner="false"/>
 		</StackPanel>
 	</Grid>
 	
