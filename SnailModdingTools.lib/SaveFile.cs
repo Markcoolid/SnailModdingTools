@@ -21,13 +21,13 @@ namespace SnailModdingTools.lib
 
         public string Version { get; set; }
 
-        public int level;
+        public int Level { get; set; }
 
-        public int deaths;
+        public int Deaths { get; set; }
 
-        public int difficulty;
+        public int Difficulty { get; set; }
 
-        public List<string> playedVoicelines;
+        public List<string> PlayedVoicelines { get; set; }
 
         public SaveFile(int slot)
         {
@@ -35,17 +35,17 @@ namespace SnailModdingTools.lib
             FileStream stream = File.OpenRead(saveFolder + "/" + saveSlotPrefix[slot - 1] + "SaavoGame23-2.sav");
             StreamReader reader = new StreamReader(stream);
 
-            this.Slot = slot;
+            Slot = slot;
 
             Version = reader.GetString("Game Version");
 
-            level = reader.GetInt("Room");
+            Level = reader.GetInt("Room");
 
-            deaths = reader.GetInt("Deaths");
+            Deaths = reader.GetInt("Deaths");
 
-            difficulty = reader.GetInt("Difficulty");
+            Difficulty = reader.GetInt("Difficulty");
 
-            playedVoicelines = reader.GetList("Played Voice Lines");
+            PlayedVoicelines = reader.GetStringList("Played Voice Lines");
 
         }
 
